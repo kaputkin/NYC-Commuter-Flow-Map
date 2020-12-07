@@ -1,0 +1,1357 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/FerryFlow_1.js"></script>
+        <script src="data/SubwayFlow_2.js"></script>
+        <script src="data/CarFlow_3.js"></script>
+        <script src="data/TrainFlow_4.js"></script>
+        <script src="data/BusFlow_5.js"></script>
+        <script src="data/WalkFlow_6.js"></script>
+        <script src="data/BikeFlow_7.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[40.60758019939373,-74.22937133352735],[40.87317106774573,-73.72555706053477]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_EsriGraydark_0');
+        map.getPane('pane_EsriGraydark_0').style.zIndex = 400;
+        var layer_EsriGraydark_0 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_EsriGraydark_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 16
+        });
+        layer_EsriGraydark_0;
+        map.addLayer(layer_EsriGraydark_0);
+        function pop_FerryFlow_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['arcid'] !== null ? autolinker.link(feature.properties['arcid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['grouped_da'] !== null ? autolinker.link(feature.properties['grouped_da'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['from_node'] !== null ? autolinker.link(feature.properties['from_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['to_node'] !== null ? autolinker.link(feature.properties['to_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['InLine_FID'] !== null ? autolinker.link(feature.properties['InLine_FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SmoLnFlag'] !== null ? autolinker.link(feature.properties['SmoLnFlag'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_FerryFlow_1_0(feature) {
+            if (feature.properties['grouped_da'] >= 4.000000 && feature.properties['grouped_da'] <= 93.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 93.000000 && feature.properties['grouped_da'] <= 210.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 210.000000 && feature.properties['grouped_da'] <= 414.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 414.000000 && feature.properties['grouped_da'] <= 674.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 674.000000 && feature.properties['grouped_da'] <= 959.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 959.000000 && feature.properties['grouped_da'] <= 1213.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 1213.000000 && feature.properties['grouped_da'] <= 1655.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 5.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 1655.000000 && feature.properties['grouped_da'] <= 2295.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 2295.000000 && feature.properties['grouped_da'] <= 3662.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 7.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 3662.000000 && feature.properties['grouped_da'] <= 4502.000000 ) {
+                return {
+                pane: 'pane_FerryFlow_1',
+                opacity: 1,
+                color: 'rgba(137,216,247,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_FerryFlow_1');
+        map.getPane('pane_FerryFlow_1').style.zIndex = 401;
+        map.getPane('pane_FerryFlow_1').style['mix-blend-mode'] = 'normal';
+        var layer_FerryFlow_1 = new L.geoJson(json_FerryFlow_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_FerryFlow_1',
+            layerName: 'layer_FerryFlow_1',
+            pane: 'pane_FerryFlow_1',
+            onEachFeature: pop_FerryFlow_1,
+            style: style_FerryFlow_1_0,
+        });
+        bounds_group.addLayer(layer_FerryFlow_1);
+        map.addLayer(layer_FerryFlow_1);
+        function pop_SubwayFlow_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['arcid'] !== null ? autolinker.link(feature.properties['arcid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['grouped_da'] !== null ? autolinker.link(feature.properties['grouped_da'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['from_node'] !== null ? autolinker.link(feature.properties['from_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['to_node'] !== null ? autolinker.link(feature.properties['to_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['InLine_FID'] !== null ? autolinker.link(feature.properties['InLine_FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SmoLnFlag'] !== null ? autolinker.link(feature.properties['SmoLnFlag'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SubwayFlow_2_0(feature) {
+            if (feature.properties['grouped_da'] >= 153.000000 && feature.properties['grouped_da'] <= 4615.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 4615.000000 && feature.properties['grouped_da'] <= 11483.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 11483.000000 && feature.properties['grouped_da'] <= 20239.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 20239.000000 && feature.properties['grouped_da'] <= 32232.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 32232.000000 && feature.properties['grouped_da'] <= 53416.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 53416.000000 && feature.properties['grouped_da'] <= 72224.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 72224.000000 && feature.properties['grouped_da'] <= 90286.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 90286.000000 && feature.properties['grouped_da'] <= 112094.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 5.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 112094.000000 && feature.properties['grouped_da'] <= 147942.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 147942.000000 && feature.properties['grouped_da'] <= 202380.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 202380.000000 && feature.properties['grouped_da'] <= 299581.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 7.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 299581.000000 && feature.properties['grouped_da'] <= 586099.000000 ) {
+                return {
+                pane: 'pane_SubwayFlow_2',
+                opacity: 1,
+                color: 'rgba(6,148,224,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_SubwayFlow_2');
+        map.getPane('pane_SubwayFlow_2').style.zIndex = 402;
+        map.getPane('pane_SubwayFlow_2').style['mix-blend-mode'] = 'normal';
+        var layer_SubwayFlow_2 = new L.geoJson(json_SubwayFlow_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_SubwayFlow_2',
+            layerName: 'layer_SubwayFlow_2',
+            pane: 'pane_SubwayFlow_2',
+            onEachFeature: pop_SubwayFlow_2,
+            style: style_SubwayFlow_2_0,
+        });
+        bounds_group.addLayer(layer_SubwayFlow_2);
+        map.addLayer(layer_SubwayFlow_2);
+        function pop_CarFlow_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['arcid'] !== null ? autolinker.link(feature.properties['arcid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['grouped_da'] !== null ? autolinker.link(feature.properties['grouped_da'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['from_node'] !== null ? autolinker.link(feature.properties['from_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['to_node'] !== null ? autolinker.link(feature.properties['to_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['InLine_FID'] !== null ? autolinker.link(feature.properties['InLine_FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SmoLnFlag'] !== null ? autolinker.link(feature.properties['SmoLnFlag'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CarFlow_3_0(feature) {
+            if (feature.properties['grouped_da'] >= 4.000000 && feature.properties['grouped_da'] <= 754.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 754.000000 && feature.properties['grouped_da'] <= 1904.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 1904.000000 && feature.properties['grouped_da'] <= 3529.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 3529.000000 && feature.properties['grouped_da'] <= 5744.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 5744.000000 && feature.properties['grouped_da'] <= 8660.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 8660.000000 && feature.properties['grouped_da'] <= 11567.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 11567.000000 && feature.properties['grouped_da'] <= 17114.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 17114.000000 && feature.properties['grouped_da'] <= 24737.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 24737.000000 && feature.properties['grouped_da'] <= 29812.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 29812.000000 && feature.properties['grouped_da'] <= 39794.000000 ) {
+                return {
+                pane: 'pane_CarFlow_3',
+                opacity: 1,
+                color: 'rgba(244,44,120,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 5.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_CarFlow_3');
+        map.getPane('pane_CarFlow_3').style.zIndex = 403;
+        map.getPane('pane_CarFlow_3').style['mix-blend-mode'] = 'normal';
+        var layer_CarFlow_3 = new L.geoJson(json_CarFlow_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_CarFlow_3',
+            layerName: 'layer_CarFlow_3',
+            pane: 'pane_CarFlow_3',
+            onEachFeature: pop_CarFlow_3,
+            style: style_CarFlow_3_0,
+        });
+        bounds_group.addLayer(layer_CarFlow_3);
+        map.addLayer(layer_CarFlow_3);
+        function pop_TrainFlow_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['arcid'] !== null ? autolinker.link(feature.properties['arcid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['grouped_da'] !== null ? autolinker.link(feature.properties['grouped_da'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['from_node'] !== null ? autolinker.link(feature.properties['from_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['to_node'] !== null ? autolinker.link(feature.properties['to_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['InLine_FID'] !== null ? autolinker.link(feature.properties['InLine_FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SmoLnFlag'] !== null ? autolinker.link(feature.properties['SmoLnFlag'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_TrainFlow_4_0(feature) {
+            if (feature.properties['grouped_da'] >= 4.000000 && feature.properties['grouped_da'] <= 370.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 370.000000 && feature.properties['grouped_da'] <= 1149.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 1149.000000 && feature.properties['grouped_da'] <= 2274.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 2274.000000 && feature.properties['grouped_da'] <= 3715.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 3715.000000 && feature.properties['grouped_da'] <= 5552.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 5552.000000 && feature.properties['grouped_da'] <= 7890.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 7890.000000 && feature.properties['grouped_da'] <= 12642.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 12642.000000 && feature.properties['grouped_da'] <= 18049.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 18049.000000 && feature.properties['grouped_da'] <= 26026.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 26026.000000 && feature.properties['grouped_da'] <= 29844.000000 ) {
+                return {
+                pane: 'pane_TrainFlow_4',
+                opacity: 1,
+                color: 'rgba(32,196,158,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 5.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_TrainFlow_4');
+        map.getPane('pane_TrainFlow_4').style.zIndex = 404;
+        map.getPane('pane_TrainFlow_4').style['mix-blend-mode'] = 'normal';
+        var layer_TrainFlow_4 = new L.geoJson(json_TrainFlow_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_TrainFlow_4',
+            layerName: 'layer_TrainFlow_4',
+            pane: 'pane_TrainFlow_4',
+            onEachFeature: pop_TrainFlow_4,
+            style: style_TrainFlow_4_0,
+        });
+        bounds_group.addLayer(layer_TrainFlow_4);
+        map.addLayer(layer_TrainFlow_4);
+        function pop_BusFlow_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['arcid'] !== null ? autolinker.link(feature.properties['arcid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Freq'] !== null ? autolinker.link(feature.properties['Freq'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['from_node'] !== null ? autolinker.link(feature.properties['from_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['to_node'] !== null ? autolinker.link(feature.properties['to_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['InLine_FID'] !== null ? autolinker.link(feature.properties['InLine_FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SmoLnFlag'] !== null ? autolinker.link(feature.properties['SmoLnFlag'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BusFlow_5_0(feature) {
+            if (feature.properties['Freq'] >= 4.000000 && feature.properties['Freq'] <= 2170.000000 ) {
+                return {
+                pane: 'pane_BusFlow_5',
+                opacity: 1,
+                color: 'rgba(51,104,209,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['Freq'] >= 2170.000000 && feature.properties['Freq'] <= 6721.000000 ) {
+                return {
+                pane: 'pane_BusFlow_5',
+                opacity: 1,
+                color: 'rgba(51,104,209,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['Freq'] >= 6721.000000 && feature.properties['Freq'] <= 13225.000000 ) {
+                return {
+                pane: 'pane_BusFlow_5',
+                opacity: 1,
+                color: 'rgba(51,104,209,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['Freq'] >= 13225.000000 && feature.properties['Freq'] <= 20181.000000 ) {
+                return {
+                pane: 'pane_BusFlow_5',
+                opacity: 1,
+                color: 'rgba(51,104,209,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['Freq'] >= 20181.000000 && feature.properties['Freq'] <= 36654.000000 ) {
+                return {
+                pane: 'pane_BusFlow_5',
+                opacity: 1,
+                color: 'rgba(51,104,209,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 5.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['Freq'] >= 36654.000000 && feature.properties['Freq'] <= 49879.000000 ) {
+                return {
+                pane: 'pane_BusFlow_5',
+                opacity: 1,
+                color: 'rgba(51,104,209,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['Freq'] >= 49879.000000 && feature.properties['Freq'] <= 67865.000000 ) {
+                return {
+                pane: 'pane_BusFlow_5',
+                opacity: 1,
+                color: 'rgba(51,104,209,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 7.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['Freq'] >= 67865.000000 && feature.properties['Freq'] <= 118039.000000 ) {
+                return {
+                pane: 'pane_BusFlow_5',
+                opacity: 1,
+                color: 'rgba(51,104,209,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_BusFlow_5');
+        map.getPane('pane_BusFlow_5').style.zIndex = 405;
+        map.getPane('pane_BusFlow_5').style['mix-blend-mode'] = 'normal';
+        var layer_BusFlow_5 = new L.geoJson(json_BusFlow_5, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_BusFlow_5',
+            layerName: 'layer_BusFlow_5',
+            pane: 'pane_BusFlow_5',
+            onEachFeature: pop_BusFlow_5,
+            style: style_BusFlow_5_0,
+        });
+        bounds_group.addLayer(layer_BusFlow_5);
+        map.addLayer(layer_BusFlow_5);
+        function pop_WalkFlow_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['arcid'] !== null ? autolinker.link(feature.properties['arcid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['grouped_da'] !== null ? autolinker.link(feature.properties['grouped_da'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['from_node'] !== null ? autolinker.link(feature.properties['from_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['to_node'] !== null ? autolinker.link(feature.properties['to_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['InLine_FID'] !== null ? autolinker.link(feature.properties['InLine_FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SmoLnFlag'] !== null ? autolinker.link(feature.properties['SmoLnFlag'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_WalkFlow_6_0(feature) {
+            if (feature.properties['grouped_da'] >= 50.000000 && feature.properties['grouped_da'] <= 229.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 229.000000 && feature.properties['grouped_da'] <= 532.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 532.000000 && feature.properties['grouped_da'] <= 1285.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 1285.000000 && feature.properties['grouped_da'] <= 1865.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 1865.000000 && feature.properties['grouped_da'] <= 2523.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 2523.000000 && feature.properties['grouped_da'] <= 3400.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 3400.000000 && feature.properties['grouped_da'] <= 4024.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 4024.000000 && feature.properties['grouped_da'] <= 4822.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 4822.000000 && feature.properties['grouped_da'] <= 6472.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 6472.000000 && feature.properties['grouped_da'] <= 8491.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 8491.000000 && feature.properties['grouped_da'] <= 11635.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 11635.000000 && feature.properties['grouped_da'] <= 22325.000000 ) {
+                return {
+                pane: 'pane_WalkFlow_6',
+                opacity: 1,
+                color: 'rgba(220,224,137,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 5.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_WalkFlow_6');
+        map.getPane('pane_WalkFlow_6').style.zIndex = 406;
+        map.getPane('pane_WalkFlow_6').style['mix-blend-mode'] = 'normal';
+        var layer_WalkFlow_6 = new L.geoJson(json_WalkFlow_6, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_WalkFlow_6',
+            layerName: 'layer_WalkFlow_6',
+            pane: 'pane_WalkFlow_6',
+            onEachFeature: pop_WalkFlow_6,
+            style: style_WalkFlow_6_0,
+        });
+        bounds_group.addLayer(layer_WalkFlow_6);
+        map.addLayer(layer_WalkFlow_6);
+        function pop_BikeFlow_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['arcid'] !== null ? autolinker.link(feature.properties['arcid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['grouped_da'] !== null ? autolinker.link(feature.properties['grouped_da'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['from_node'] !== null ? autolinker.link(feature.properties['from_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['to_node'] !== null ? autolinker.link(feature.properties['to_node'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['InLine_FID'] !== null ? autolinker.link(feature.properties['InLine_FID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SmoLnFlag'] !== null ? autolinker.link(feature.properties['SmoLnFlag'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BikeFlow_7_0(feature) {
+            if (feature.properties['grouped_da'] >= 20.000000 && feature.properties['grouped_da'] <= 67.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 67.000000 && feature.properties['grouped_da'] <= 136.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 136.000000 && feature.properties['grouped_da'] <= 225.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 225.000000 && feature.properties['grouped_da'] <= 333.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 333.000000 && feature.properties['grouped_da'] <= 475.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 475.000000 && feature.properties['grouped_da'] <= 641.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 641.000000 && feature.properties['grouped_da'] <= 904.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 904.000000 && feature.properties['grouped_da'] <= 1098.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 1098.000000 && feature.properties['grouped_da'] <= 1439.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 1439.000000 && feature.properties['grouped_da'] <= 2287.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 2287.000000 && feature.properties['grouped_da'] <= 3447.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 3447.000000 && feature.properties['grouped_da'] <= 4617.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 4617.000000 && feature.properties['grouped_da'] <= 6702.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['grouped_da'] >= 6702.000000 && feature.properties['grouped_da'] <= 9376.000000 ) {
+                return {
+                pane: 'pane_BikeFlow_7',
+                opacity: 1,
+                color: 'rgba(73,175,108,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+        }
+        map.createPane('pane_BikeFlow_7');
+        map.getPane('pane_BikeFlow_7').style.zIndex = 407;
+        map.getPane('pane_BikeFlow_7').style['mix-blend-mode'] = 'normal';
+        var layer_BikeFlow_7 = new L.geoJson(json_BikeFlow_7, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_BikeFlow_7',
+            layerName: 'layer_BikeFlow_7',
+            pane: 'pane_BikeFlow_7',
+            onEachFeature: pop_BikeFlow_7,
+            style: style_BikeFlow_7_0,
+        });
+        bounds_group.addLayer(layer_BikeFlow_7);
+        map.addLayer(layer_BikeFlow_7);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Biking<br /><table><tr><td style="text-align: center;"><img src="legend/BikeFlow_7_6702937613.png" /></td></tr></table>': layer_BikeFlow_7,'Walking<br /><table><tr><td style="text-align: center;"><img src="legend/WalkFlow_6_402448227.png" /></td><td></td></tr></table>': layer_WalkFlow_6,'Bus<br /><table><tr><td style="text-align: center;"><img src="legend/BusFlow_5_20181366544.png" /></td><td></td></tr></table>': layer_BusFlow_5,'Train<br /><table><tr><td style="text-align: center;"><img src="legend/TrainFlow_4_7890126426.png" /></td><td></td></tr></table>': layer_TrainFlow_4,'Car<br /><table><tr><td style="text-align: center;"><img src="legend/CarFlow_3_8660115675.png" /></td><td></td></tr></table>': layer_CarFlow_3,'Subway<br /><table><tr><td style="text-align: center;"><img src="legend/SubwayFlow_2_32232534164.png" /></td><td></td></tr></table>': layer_SubwayFlow_2,'Ferry<br /><table><tr><td style="text-align: center;"><img src="legend/FerryFlow_1_6749594.png" /></td><td></td></tr></table>': layer_FerryFlow_1,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
