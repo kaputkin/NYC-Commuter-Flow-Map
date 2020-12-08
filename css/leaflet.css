@@ -372,6 +372,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .leaflet-control-layers-expanded {
 	padding: 6px 10px 6px 6px;
 	color: ##f0f0f0;
+	font-family: 'JetBrains Mono', sans-serif;
 	background-color: #616161;
 	}
 .leaflet-control-layers-scrollbar {
