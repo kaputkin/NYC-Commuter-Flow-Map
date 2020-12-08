@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
     <head>
+      <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
+      <title>NYC Commuter Flows</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
@@ -37,9 +39,18 @@
         <script src="data/BusFlow_5.js"></script>
         <script src="data/WalkFlow_6.js"></script>
         <script src="data/BikeFlow_7.js"></script>
+        <div id="mymap">
+          <div id="title-container">
+            <h1><span style="color:#34eba1;">Commuting to the City</span></h1>
+            <p>This map visualizes the flow volume</br> of commuters into Manhattan, the mode </br>they use, and  their generalized paths.
+            </br>
+          </br><span style="color:#15a2de; font-size: 16px">Data: 2018 LODES, US Census</span>
+         </p>
+          </div>
+        </div>
         <script>
         var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
+            zoomControl:true, maxZoom:22, minZoom:1
         }).fitBounds([[40.60758019939373,-74.22937133352735],[40.87317106774573,-73.72555706053477]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
